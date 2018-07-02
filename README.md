@@ -16,11 +16,10 @@
 
 #### 使用说明
 
-![分类列表](image/f.png=200px)
+<img src="image/f.png" width=256/><br>
+<img src="image/c.png" width=256/><br>
+<img src="image/m.png" width=256/><br>
 
-![收藏夹](image/c.png=200px)
-
-![我的个人中心](image/m.png=200px)
 
 
 
