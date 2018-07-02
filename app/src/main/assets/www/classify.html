@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/jquery.min.js"></script>
+		
+		<style>
+			*{
+				color: #555555;
+			}
+			table{
+				font-family: sans-serif;
+				text-align: center;
+				width: 100%;
+				
+			}
+			table:first-child{
+				margin-top: 20px;
+			}
+			td{
+				width: 30%;
+			}
+			td>img{
+				width:90px;
+				height: 120px;
+				margin: 5px;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<table>
+			<tr>
+				<td><img id="rexue" class="lazy" src="images/classify/rexue.jpg" /><br>热血</td>
+				<td><img id="qingchun" class="lazy" src="images/classify/qingchun.jpg" /><br>青春</td>
+				<td><img id="luoli" class="lazy" src="images/classify/luoli.jpg" /><br>萝莉</td>
+			</tr>
+			<tr>
+				<td><img id="jizhan" class="lazy" src="images/classify/jizhan.jpg" /><br>机战</td>
+				<td><img id="kongbu" class="lazy" src="images/classify/kongbu.jpg" /><br>恐惧</td>
+				<td><img id="qihuan" class="lazy" src="images/classify/qihuan.jpg" /><br>奇幻</td>
+			</tr>
+			<tr>
+				<td><img id="zhuangbi" class="lazy" src="images/classify/zhuangbi.jpg" /><br>装逼</td>
+				<td><img id="hougong" class="lazy" src="images/classify/hougong.jpg" /><br>后宫</td>
+				<td><img id="maoxian" class="lazy" src="images/classify/maoxian.jpg" /><br>冒险</td>
+			</tr>
+			<tr>
+				<td><img id="qingxiaoshuo" class="lazy" src="images/classify/qingxiaoshuo.jpg" /><br>轻小说</td>
+				<td><img id="roufan" class="lazy" src="images/classify/roufan.jpg" /><br>肉番</td>
+				<td><img id="gaoxiao" class="lazy" src="images/classify/gaoxiao.jpg" /><br>搞笑</td>
+			</tr>
+			<tr>
+				<td><img id="tuili" class="lazy" src="images/classify/tuili.jpg" /><br>推理</td>
+				<td><img id="kehuan" class="lazy" src="images/classify/kehuan.jpg" /><br>科幻</td>
+				<td><img id="danmei" class="lazy" src="images/classify/danmei.jpg" /><br>耽美</td>
+			</tr>
+			<tr>
+				<td><img id="yundong" class="lazy" src="images/classify/yundong.jpg" /><br>运动</td>
+				<td><img id="youxi" class="lazy" src="images/classify/youxi.jpg" /><br>游戏</td>
+				<td><img id="zhenren" class="lazy" src="images/classify/zhenren.jpg" /><br>真人</td>
+			</tr>
+			<tr>
+				<td><img id="zhiyuxi" class="lazy" src="images/classify/zhiyuxi.jpg" /><br>治愈系</td>
+				<td><img id="tongnian" class="lazy" src="images/classify/tongnian.jpg" /><br>童年</td>
+				<td><img id="lianai" class="lazy" src="images/classify/lianai.jpg" /><br>恋爱</td>
+			</tr>
+			<tr>
+				<td><img id="meishaonv" class="lazy" src="images/classify/meishaonv.png" /><br>美少女</td>
+				<td><img id="lizi" class="lazy" src="images/classify/lizhi.jpg" /><br>励志</td>
+				<td><img id="baihe" class="lazy" src="images/classify/baihe.jpg" /><br>百合</td>
+			</tr>
+			<tr>
+				<td><img id="paomianfan" class="lazy" src="images/classify/paomianfan.jpg" /><br>泡面番</td>
+				<td><img id="yinv" class="lazy" src="images/classify/yinv.jpg" /><br>乙女</td>
+				<td><img id="jcdh" class="lazy" src="images/classify/juchangban.jpg" /><br>剧场版</td>
+			</tr>
+		</table>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+//			  $(function() {
+//   		 		$("img.lazy").lazyload({effect: "fadeIn"});
+// 				});
+ 				$("img.lazy").click(function(e){
+ 					var id=$(this)[0].id;
+ 					window.open("http://m.dilidili.wang/"+id+"/");
+ 				})
+		</script>
+		
+	</body>
+
+</html>

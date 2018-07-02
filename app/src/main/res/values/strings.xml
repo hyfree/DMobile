@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">DMobile</string>
+    <string name="title_home">主页</string>
+    <string name="title_classify">分类</string>
+    <string name="title_like">收藏</string>
+    <string name="title_user">我的</string>
+    <string name="title_setup">设置</string>
+</resources>

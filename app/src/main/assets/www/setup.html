@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/jquery.min.js"></script>
+		<style>
+			.title{
+			    font-family: helvetica ,Helvetica,sans-serif;
+			        margin: 5px 15px 7px;
+   					 color: #6d6d72;
+   					 font-size: 15px;
+			}
+			#header{
+				width: 100%;
+				height:150px;
+			
+				background:  url(images/bg/timg.jpg) no-repeat center center;
+				background-size: cover;
+				text-align: center;
+				
+				
+				
+			}
+			#touxiangdiv{
+				width: 100px;
+				height: 150px;
+				margin: auto;
+				
+				text-align: center;
+			}
+			
+			#touxiang{
+				margin-top:50px ;
+				width: 60px;
+				border-radius: 60px;
+				
+			}
+			#login{
+				margin-top: 0;
+				line-height:200%;
+				color: white;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<div id="touxiangdiv">
+				
+				<img id="touxiang" src="images/bg/chimian.jpg"  />
+				<p id="login">请登录</p>
+			</div>
+		</div>
+		<div class="title">
+				  
+			</div>
+			<ul class="mui-table-view">
+				 <li class="mui-table-view-cell">收藏</li>
+		         <li class="mui-table-view-cell">下载</li>
+		         <li class="mui-table-view-cell">观看</li>
+			</ul>
+			<div class="title">
+				  
+			</div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						设置
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						反馈
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						版本
+					</a>
+				</li>
+			</ul>
+			<pre class="title">  Dmobile开发预览版，仅供研究与学习用途
+			
+			</pre>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			$("#touxiangdiv").click(function(){
+				window.open("login.html");
+			})
+		</script>
+	</body>
+
+</html>
