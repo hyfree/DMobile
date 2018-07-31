@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="xyz.hyfree.sinteam.dmobile">
-    <!--1.联网权限-->
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 电源管理，防止播放视频时进入休眠 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <!--文件访问权限-->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- 文件访问权限 -->
+    <!-- 新版本的安卓在这里申明权限的情况下，仍然需要在调用处显式的申请 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 腾讯浏览器服务，基于X5 -->
+    <!-- 读写储存卡 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 获取网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 获取当前WiFi接入的状态以及WLAN热点的信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 访问互联网 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 访问电话状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"

@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <WebView
+        <xyz.hyfree.sinteam.dmobile.TBS.TBSWebView
             android:id="@+id/web"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

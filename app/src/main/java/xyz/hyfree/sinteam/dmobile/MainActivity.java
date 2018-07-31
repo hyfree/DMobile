@@ -37,9 +37,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.tencent.smtt.export.external.interfaces.IX5WebChromeClient;
+
 import java.net.URL;
 import java.util.ArrayList;
 
+import xyz.hyfree.sinteam.dmobile.TBS.TBSWebView;
 import xyz.hyfree.sinteam.dmobile.Util.HttpDownloader;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,12 +53,12 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView navigation;
 
 
-    WebView mWebView;
+    TBSWebView mWebView;
 
     //全屏播放的容器
     FrameLayout mFullVideoBox;
     //全屏播放
-    WebChromeClient.CustomViewCallback mCallBack;
+    IX5WebChromeClient.CustomViewCallback mCallBack;
     //是否是在全屏播放
     Boolean isFullScr=false;
     //电源管理（全屏的时候常亮）
@@ -161,86 +164,86 @@ public class MainActivity extends AppCompatActivity {
                     .show();
         }
         /*配置mWebView*/
-          mWebView=(WebView)findViewById(R.id.web);
-
+         // mWebView=(WebView)findViewById(R.id.web);
+        mWebView=(xyz.hyfree.sinteam.dmobile.TBS.TBSWebView) findViewById(R.id.web);
+        TBSWebView.FastSetting(mWebView,this);
           //打开后开始加载
         mWebView.loadUrl("http://m.dilidili.wang/");
-        final WebSettings webSettings=mWebView.getSettings();
+        final com.tencent.smtt.sdk.WebSettings webSettings=mWebView.getSettings();
 
         //开发模式，允许调试
         //setWebContentsDebuggingEnabled(true);　
         if (Build.VERSION.SDK_INT>=19)
         mWebView.setWebContentsDebuggingEnabled(true);
 
-        //支持JavaScript
-        webSettings.setJavaScriptEnabled(true);
-
-        // 支持使用localStorage(H5页面的支持)
-        webSettings.setDomStorageEnabled(true);
-
-        // 支持数据库
-        webSettings.setDatabaseEnabled(true);
-
-        // 支持缓存
-        webSettings.setAppCacheEnabled(true);
-        String appCaceDir = this.getApplicationContext().getDir("cache", Context.MODE_PRIVATE).getPath();
-        webSettings.setAppCachePath(appCaceDir);
-
-        // 设置可以支持缩放
-       // webSettings.setUseWideViewPort(true);
-
-        // 扩大比例的缩放
-        // webSettings.setSupportZoom(true);
-        //webSettings.setBuiltInZoomControls(true);
-
-        // 隐藏缩放按钮
-        webSettings.setDisplayZoomControls(false);
-
-        // 自适应屏幕
-        //webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        //webSettings.setLoadWithOverviewMode(true);
-
-        // 隐藏滚动条
-        mWebView.setHorizontalScrollBarEnabled(false);
-        mWebView.setVerticalScrollBarEnabled(false);
-
-        //硬件加速
-         //mWebView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-
-        //允许js调用java方法
-        if (Build.VERSION.SDK_INT<17)
-         mWebView.addJavascriptInterface(MainActivity.this,"android");
-
-        //处理UA
-        webSettings.setUserAgentString("Mozilla/5.0 (Linux; Android 5.1; m2 note Build/LMY47D) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/37.0.0.0 Mobile MQQBrowser/6.2 TBS/036222 Safari/537.36 V1_AND_SQ_6.3.3_358_YYB_D QQ/6.3.3.2755 NetType/WIFI WebP/0.3.0 Pixel/1080");
-
-        //支持插件
-        webSettings.setPluginState(WebSettings.PluginState.ON);
-
-        //允许加载不安全的来源（不推荐）
-        if (Build.VERSION.SDK_INT>=21)
-        webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+//        //支持JavaScript
+//        webSettings.setJavaScriptEnabled(true);
+//
+//        // 支持使用localStorage(H5页面的支持)
+//        webSettings.setDomStorageEnabled(true);
+//
+//        // 支持数据库
+//        webSettings.setDatabaseEnabled(true);
+//
+//        // 支持缓存
+//        webSettings.setAppCacheEnabled(true);
+//        String appCaceDir = this.getApplicationContext().getDir("cache", Context.MODE_PRIVATE).getPath();
+//        webSettings.setAppCachePath(appCaceDir);
+//
+//        // 设置可以支持缩放
+//       // webSettings.setUseWideViewPort(true);
+//
+//        // 扩大比例的缩放
+//        // webSettings.setSupportZoom(true);
+//        //webSettings.setBuiltInZoomControls(true);
+//
+//        // 隐藏缩放按钮
+//        webSettings.setDisplayZoomControls(false);
+//
+//        // 自适应屏幕
+//        //webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+//        //webSettings.setLoadWithOverviewMode(true);
+//
+//        // 隐藏滚动条
+//        mWebView.setHorizontalScrollBarEnabled(false);
+//        mWebView.setVerticalScrollBarEnabled(false);
+//
+//        //硬件加速
+//         //mWebView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+//
+//        //允许js调用java方法
+//        if (Build.VERSION.SDK_INT<17)
+//         mWebView.addJavascriptInterface(MainActivity.this,"android");
+//
+//        //处理UA
+//        webSettings.setUserAgentString("Mozilla/5.0 (Linux; Android 5.1; m2 note Build/LMY47D) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/37.0.0.0 Mobile MQQBrowser/6.2 TBS/036222 Safari/537.36 V1_AND_SQ_6.3.3_358_YYB_D QQ/6.3.3.2755 NetType/WIFI WebP/0.3.0 Pixel/1080");
+//
+//        //支持插件
+//        webSettings.setPluginState(WebSettings.PluginState.ON);
+//
+//        //允许加载不安全的来源（不推荐）
+//        if (Build.VERSION.SDK_INT>=21)
+//        webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
 
         // 处理网页内的连接（自身打开）,重写webClient
-        mWebView.setWebViewClient(new WebViewClient(){
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-               mWebView.loadUrl(url);
+        mWebView.setWebViewClient(new com.tencent.smtt.sdk.WebViewClient(){
 
-               return true;
-              //  return super.shouldOverrideUrlLoading(view, url);
+            @Override
+            public boolean shouldOverrideUrlLoading(com.tencent.smtt.sdk.WebView webView, String s) {
+                mWebView.loadUrl(s);
+                return  true;
+                //return super.shouldOverrideUrlLoading(webView, s);
             }
-
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                mWebView.loadUrl(request.getUrl().toString());
+            public boolean shouldOverrideUrlLoading(com.tencent.smtt.sdk.WebView webView, com.tencent.smtt.export.external.interfaces.WebResourceRequest webResourceRequest) {
+                mWebView.loadUrl(webResourceRequest.getUrl().toString());
                 return true;
-               // return super.shouldOverrideUrlLoading(view, request);
+               // return super.shouldOverrideUrlLoading(webView, webResourceRequest);
             }
         });
 
         //重写mWebView的WebChromeClient
-        mWebView.setWebChromeClient(new WebChromeClient(){
+        mWebView.setWebChromeClient(new com.tencent.smtt.sdk.WebChromeClient(){
             @Override
             //取消全屏
             public void onHideCustomView() {
@@ -266,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             //开始全屏
-            public void onShowCustomView(View view, CustomViewCallback callback) {
+            public void onShowCustomView(View view, IX5WebChromeClient.CustomViewCallback callback) {
                 fullScreen();
                 mWebView.setVisibility(View.GONE);
                 mFullVideoBox.setVisibility(View.VISIBLE);
@@ -298,7 +301,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        mWebView.setDownloadListener(new DownloadListener() {
+        mWebView.setDownloadListener(new com.tencent.smtt.sdk.DownloadListener() {
             @Override
             public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
                 Intent intent = new Intent();
@@ -313,9 +316,6 @@ public class MainActivity extends AppCompatActivity {
            //   new downloadMP4Thread().start();
        // mWebView.setWebContentsDebuggingEnabled(true);
         //mWebView config end
-
-
-
 
 
     }
