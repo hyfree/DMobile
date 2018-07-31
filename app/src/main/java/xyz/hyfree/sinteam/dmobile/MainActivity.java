@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView navigation;
 
 
+    //TBS组件
     TBSWebView mWebView;
 
     //全屏播放的容器
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     //电源管理（全屏的时候常亮）
     private PowerManager powerManager = null;
     private PowerManager.WakeLock wakeLock = null;
-
+    //低栏按钮
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -138,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar=getSupportActionBar();
 
 
-
+        //绑定全屏播放容器
         mFullVideoBox=(FrameLayout)findViewById(R.id.myFullVideoBox);
 
         //绑定低栏
@@ -227,7 +228,6 @@ public class MainActivity extends AppCompatActivity {
 
         // 处理网页内的连接（自身打开）,重写webClient
         mWebView.setWebViewClient(new com.tencent.smtt.sdk.WebViewClient(){
-
             @Override
             public boolean shouldOverrideUrlLoading(com.tencent.smtt.sdk.WebView webView, String s) {
                 mWebView.loadUrl(s);
@@ -263,7 +263,6 @@ public class MainActivity extends AppCompatActivity {
                 );
                 //取消屏幕常亮，onPause()方法中执行
                 wakeLock.release();
-
                 super.onHideCustomView();
             }
 
@@ -288,19 +287,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        //重写app的按键事件
         mWebView.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //重写了返回事件
                 if (event.getAction()==KeyEvent.ACTION_DOWN){
                     if (keyCode== KeyEvent.KEYCODE_BACK&&mWebView.canGoBack()){
                         mWebView.goBack();
                         return true;
                     }
                 }
-
                 return false;
             }
         });
+        //mWebView的下载事件监听器
         mWebView.setDownloadListener(new com.tencent.smtt.sdk.DownloadListener() {
             @Override
             public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
@@ -316,13 +317,9 @@ public class MainActivity extends AppCompatActivity {
            //   new downloadMP4Thread().start();
        // mWebView.setWebContentsDebuggingEnabled(true);
         //mWebView config end
-
-
     }
 
-
-
-}
+}//下载线程类
 class downloadFileThread extends Thread{
     public void run(){
 
