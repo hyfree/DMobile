@@ -288,19 +288,23 @@ public class MainActivity extends AppCompatActivity {
 
 
         //重写app的按键事件
-        mWebView.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                //重写了返回事件
-                if (event.getAction()==KeyEvent.ACTION_DOWN){
-                    if (keyCode== KeyEvent.KEYCODE_BACK&&mWebView.canGoBack()){
-                        mWebView.goBack();
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });
+
+//        mWebView.setOnKeyListener(new xyz.hyfree.sinteam.dmobile.TBS.TBSWebView.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                //重写了返回事件
+//                if (event.getAction()==KeyEvent.ACTION_DOWN){
+//                    if (keyCode== KeyEvent.KEYCODE_BACK&&mWebView.canGoBack()){
+//                        mWebView.goBack();
+//                        return true;
+//                    }
+//                }
+//                return false;
+//            }
+//
+//        });
+
+
         //mWebView的下载事件监听器
         mWebView.setDownloadListener(new com.tencent.smtt.sdk.DownloadListener() {
             @Override
@@ -319,6 +323,26 @@ public class MainActivity extends AppCompatActivity {
         //mWebView config end
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK)
+        {
+            if(isFullScr){
+
+                return  true;
+            }
+            if(mWebView.canGoBack())
+            {
+                mWebView.goBack();//返回上一页面
+                return true;
+            }
+            else
+            {
+                System.exit(0);//退出程序
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }//下载线程类
 class downloadFileThread extends Thread{
     public void run(){
