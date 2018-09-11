@@ -5,4 +5,7 @@
     <string name="title_like">收藏</string>
     <string name="title_user">我的</string>
     <string name="title_setup">设置</string>
+    <string name="title_activity_am_main">AM_main</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

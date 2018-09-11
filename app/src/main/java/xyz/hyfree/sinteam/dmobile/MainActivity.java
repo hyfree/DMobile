@@ -3,7 +3,7 @@ package xyz.hyfree.sinteam.dmobile;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Service;
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -17,31 +17,17 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
-import android.webkit.DownloadListener;
-import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebResourceResponse;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tencent.smtt.export.external.interfaces.IX5WebChromeClient;
 
-import java.net.URL;
-import java.util.ArrayList;
-
+import xyz.hyfree.sinteam.dmobile.ACModel.AM_main;
 import xyz.hyfree.sinteam.dmobile.TBS.TBSWebView;
 import xyz.hyfree.sinteam.dmobile.Util.HttpDownloader;
 
@@ -51,11 +37,8 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout arena;
     ActionBar actionBar;
     BottomNavigationView navigation;
-
-
     //TBS组件
     TBSWebView mWebView;
-
     //全屏播放的容器
     FrameLayout mFullVideoBox;
     //全屏播放
@@ -109,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
+
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         mWebView.restoreState(savedInstanceState);
@@ -137,8 +121,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         actionBar=getSupportActionBar();
-
-
         //绑定全屏播放容器
         mFullVideoBox=(FrameLayout)findViewById(R.id.myFullVideoBox);
 
@@ -164,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
                     .setPositiveButton("确定",null)
                     .show();
         }
+
         /*配置mWebView*/
          // mWebView=(WebView)findViewById(R.id.web);
         mWebView=(xyz.hyfree.sinteam.dmobile.TBS.TBSWebView) findViewById(R.id.web);
@@ -176,55 +159,6 @@ public class MainActivity extends AppCompatActivity {
         //setWebContentsDebuggingEnabled(true);　
         if (Build.VERSION.SDK_INT>=19)
         mWebView.setWebContentsDebuggingEnabled(true);
-
-//        //支持JavaScript
-//        webSettings.setJavaScriptEnabled(true);
-//
-//        // 支持使用localStorage(H5页面的支持)
-//        webSettings.setDomStorageEnabled(true);
-//
-//        // 支持数据库
-//        webSettings.setDatabaseEnabled(true);
-//
-//        // 支持缓存
-//        webSettings.setAppCacheEnabled(true);
-//        String appCaceDir = this.getApplicationContext().getDir("cache", Context.MODE_PRIVATE).getPath();
-//        webSettings.setAppCachePath(appCaceDir);
-//
-//        // 设置可以支持缩放
-//       // webSettings.setUseWideViewPort(true);
-//
-//        // 扩大比例的缩放
-//        // webSettings.setSupportZoom(true);
-//        //webSettings.setBuiltInZoomControls(true);
-//
-//        // 隐藏缩放按钮
-//        webSettings.setDisplayZoomControls(false);
-//
-//        // 自适应屏幕
-//        //webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-//        //webSettings.setLoadWithOverviewMode(true);
-//
-//        // 隐藏滚动条
-//        mWebView.setHorizontalScrollBarEnabled(false);
-//        mWebView.setVerticalScrollBarEnabled(false);
-//
-//        //硬件加速
-//         //mWebView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-//
-//        //允许js调用java方法
-//        if (Build.VERSION.SDK_INT<17)
-//         mWebView.addJavascriptInterface(MainActivity.this,"android");
-//
-//        //处理UA
-//        webSettings.setUserAgentString("Mozilla/5.0 (Linux; Android 5.1; m2 note Build/LMY47D) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/37.0.0.0 Mobile MQQBrowser/6.2 TBS/036222 Safari/537.36 V1_AND_SQ_6.3.3_358_YYB_D QQ/6.3.3.2755 NetType/WIFI WebP/0.3.0 Pixel/1080");
-//
-//        //支持插件
-//        webSettings.setPluginState(WebSettings.PluginState.ON);
-//
-//        //允许加载不安全的来源（不推荐）
-//        if (Build.VERSION.SDK_INT>=21)
-//        webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
 
         // 处理网页内的连接（自身打开）,重写webClient
         mWebView.setWebViewClient(new com.tencent.smtt.sdk.WebViewClient(){
@@ -241,7 +175,6 @@ public class MainActivity extends AppCompatActivity {
                // return super.shouldOverrideUrlLoading(webView, webResourceRequest);
             }
         });
-
         //重写mWebView的WebChromeClient
         mWebView.setWebChromeClient(new com.tencent.smtt.sdk.WebChromeClient(){
             @Override
@@ -286,26 +219,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        //重写app的按键事件
-
-//        mWebView.setOnKeyListener(new xyz.hyfree.sinteam.dmobile.TBS.TBSWebView.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                //重写了返回事件
-//                if (event.getAction()==KeyEvent.ACTION_DOWN){
-//                    if (keyCode== KeyEvent.KEYCODE_BACK&&mWebView.canGoBack()){
-//                        mWebView.goBack();
-//                        return true;
-//                    }
-//                }
-//                return false;
-//            }
-//
-//        });
-
-
         //mWebView的下载事件监听器
+
         mWebView.setDownloadListener(new com.tencent.smtt.sdk.DownloadListener() {
             @Override
             public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
@@ -314,13 +229,11 @@ public class MainActivity extends AppCompatActivity {
                 intent.addCategory(Intent.CATEGORY_BROWSABLE);
                 intent.setData(Uri.parse(url));
                 startActivity(intent);
-
             }
         });
-      //  if(isGrantExternalRW(this))
-           //   new downloadMP4Thread().start();
-       // mWebView.setWebContentsDebuggingEnabled(true);
-        //mWebView config end
+        alert();
+
+
     }
 
     @Override
@@ -343,7 +256,39 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-}//下载线程类
+    public  void alert(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setIcon(R.drawable.ic_home_black_24dp);
+        builder.setTitle("选择一个界面渲染方案");
+        //    指定下拉列表的显示数据
+        final String[] cities = {"TBS方案", "Native方案", "Activity方案","Hybrid方案"};
+        //    设置一个下拉的列表选择项
+        builder.setItems(cities, new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                Toast.makeText(MainActivity.this, "选择的模式为：" + cities[which], Toast.LENGTH_SHORT).show();
+                switch (which){
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case  2:
+                        Intent intent=new Intent(MainActivity.this,AM_main.class);
+                        startActivity(intent);
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+        builder.show();
+    }
+}
+///下载线程类
 class downloadFileThread extends Thread{
     public void run(){
 
