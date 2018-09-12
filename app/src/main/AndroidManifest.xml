@@ -41,6 +41,25 @@
         <activity
             android:name=".ACModel.AM_main"
             android:label="@string/title_activity_am_main"></activity>
+        <activity android:name=".view.MainActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".view.MyselfActivity" />
+        <activity android:name=".view.ShoppingcarActivity" />
+        <activity
+            android:name=".view.GoodslistActivity"
+            android:label="@string/title_activity_goodslist"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".view.LoginActivity" />
+        <activity android:name=".view.RegisterActivity" />
+        <activity android:name=".view.MyinfoActivity" />
+        <activity android:name=".view.GoodsdetailActivity" />
+        <activity android:name=".view.MyHistoryActivity" />
     </application>
 
 </manifest>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="xyz.hyfree.sinteam.dmobile.view.GoodslistActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/rll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        >
+        <ImageView
+            android:id="@+id/iv_arrow_lift"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="6dp"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/arrow_left_icon"/>
+        <EditText
+            android:id="@+id/et_serach"
+            android:layout_width="180dp"
+            android:hint="请输入商品名"
+            android:layout_height="wrap_content"
+
+            android:layout_centerHorizontal="true"/>
+        <ImageView
+            android:id="@+id/iv_serach2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/top_search_icon"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_below="@id/rll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <GridView
+            android:id="@+id/gv_food"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </GridView>
+    </LinearLayout>
+</RelativeLayout>

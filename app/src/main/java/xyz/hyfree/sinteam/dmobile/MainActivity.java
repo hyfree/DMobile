@@ -257,32 +257,42 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
     public  void alert(){
+
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setIcon(R.drawable.ic_home_black_24dp);
         builder.setTitle("选择一个界面渲染方案");
         //    指定下拉列表的显示数据
-        final String[] cities = {"TBS方案", "Native方案", "Activity方案","Hybrid方案"};
+        final String[] cities = {"TBS方案(html5混合开发)", "Native方案(商城作业)", "Reac Native方案(JS抽象UI)","Hybrid方案(容器渲染)"};
         //    设置一个下拉的列表选择项
         builder.setItems(cities, new DialogInterface.OnClickListener()
         {
+            String MyMessage="";
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
-                Toast.makeText(MainActivity.this, "选择的模式为：" + cities[which], Toast.LENGTH_SHORT).show();
+
                 switch (which){
                     case 0:
+                        MyMessage="你选了TBS方案(html5混合开发)。混合应用程序让开发人员可以把HTML5应用程序嵌入到一个细薄的原生容器里面，集原生应用程序和HTML5应用程序的优点（及缺点）于一体。";
                         break;
                     case 1:
-                        break;
-                    case  2:
-                        Intent intent=new Intent(MainActivity.this,AM_main.class);
+                        MyMessage="原生开发模式，可以获得更高的性能和稳定性。但是其劣势也是明显的，开发成本大包括开发周期、用户升级等。";
+                        Intent intent=new Intent(MainActivity.this,xyz.hyfree.sinteam.dmobile.view.MainActivity.class);
                         startActivity(intent);
                         break;
-                    case 3:
+                    case  2://RN
+                        MyMessage="结合了Web应用和Native应用，可以使用JS开原生APP应用：用React抽象UI组件、代替DOM元素来渲染等。";
+
+                        break;
+                    case 3://
+                        MyMessage="介于Native APP和web APP之间的混合APP，具有Native APP良好的用户体验和Web APP的跨平台的优势。";
                         break;
                     default:
                         break;
                 }
+
+                //Toast.makeText(MainActivity.this, "选择的模式为：" + cities[which], Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, MyMessage, Toast.LENGTH_LONG).show();
             }
         });
         builder.show();

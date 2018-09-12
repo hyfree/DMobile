@@ -3,4 +3,9 @@
     <color name="colorPrimary">#ec6149</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="bgcolor">#f4e9ed</color>
+    <color name="btn_1">#f7dc63</color>
+    <color name="btn_2">#e4183d</color>
+    <color name="hui">#878787</color>
+    <color name="bai">#f9f3f3</color>
 </resources>
