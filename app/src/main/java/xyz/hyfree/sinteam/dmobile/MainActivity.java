@@ -2,7 +2,9 @@ package xyz.hyfree.sinteam.dmobile;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Application;
 import android.app.Service;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                    // mTextMessage.setText(R.string.title_home);
-                    mWebView.loadUrl("http://m.dilidili.wang/");
+                    mWebView.loadUrl("file:///android_asset/www/home.html");
                     return true;
                 case R.id.navigation_classify:
                     //mTextMessage.setText(R.string.title_classify);
@@ -139,10 +141,10 @@ public class MainActivity extends AppCompatActivity {
         arena=(LinearLayout)findViewById(R.id.arena);
 
         //检查客户端系统
-        if (Build.VERSION.SDK_INT<17){
+        if (Build.VERSION.SDK_INT<22){
             new AlertDialog.Builder(this)
                     .setTitle("提醒：")
-                    .setMessage("你手机的当前android版本太低，app可能无法运行。最低环境要求为：Android 4.2, 4.2.2")
+                    .setMessage("你手机的当前android版本太低，app部分功能可能无法运行。最低环境要求为：Android 5.1")
                     .setPositiveButton("确定",null)
                     .show();
         }
@@ -152,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
         mWebView=(xyz.hyfree.sinteam.dmobile.TBS.TBSWebView) findViewById(R.id.web);
         TBSWebView.FastSetting(mWebView,this);
           //打开后开始加载
-        mWebView.loadUrl("http://m.dilidili.wang/");
+        mWebView.loadUrl("file:///android_asset/www/home.html");
         final com.tencent.smtt.sdk.WebSettings webSettings=mWebView.getSettings();
 
         //开发模式，允许调试
@@ -231,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        alert();
+        alert(this);
 
 
     }
@@ -256,7 +258,8 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-    public  void alert(){
+    //弹窗
+    public  void alert(final Context context){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setIcon(R.drawable.ic_home_black_24dp);
@@ -268,35 +271,36 @@ public class MainActivity extends AppCompatActivity {
         {
             String MyMessage="";
             @Override
-            public void onClick(DialogInterface dialog, int which)
+            public void onClick(DialogInterface dialog, final int which)
             {
-
+                Intent intent=null;
                 switch (which){
                     case 0:
-                        MyMessage="你选了TBS方案(html5混合开发)。混合应用程序让开发人员可以把HTML5应用程序嵌入到一个细薄的原生容器里面，集原生应用程序和HTML5应用程序的优点（及缺点）于一体。";
+                        MyMessage="html5混合开发模式开发人员可以把HTML5应用程序嵌入到一个细薄的原生容器里面，集原生应用程序和HTML5应用程序的优点（及缺点）于一体。";
                         break;
                     case 1:
-                        MyMessage="原生开发模式，可以获得更高的性能和稳定性。但是其劣势也是明显的，开发成本大包括开发周期、用户升级等。";
-                        Intent intent=new Intent(MainActivity.this,xyz.hyfree.sinteam.dmobile.view.MainActivity.class);
-                        startActivity(intent);
+                        MyMessage="Native原生开发模式，可以获得更高的性能和稳定性。但是其劣势也是明显的，开发成本大包括开发周期、用户升级等。";
+                         //intent=new Intent(MainActivity.this,xyz.hyfree.sinteam.dmobile.view.MainActivity.class);
                         break;
                     case  2://RN
-                        MyMessage="结合了Web应用和Native应用，可以使用JS开原生APP应用：用React抽象UI组件、代替DOM元素来渲染等。";
+                        MyMessage="Reac Native开发模式结合了Web应用和Native应用，可以使用JS开原生APP应用：用React抽象UI组件、代替DOM元素来渲染等。";
 
                         break;
                     case 3://
-                        MyMessage="介于Native APP和web APP之间的混合APP，具有Native APP良好的用户体验和Web APP的跨平台的优势。";
+                        MyMessage="Hybrid开发模式介于Native APP和web APP之间的混合APP，具有Native APP良好的用户体验和Web APP的跨平台的优势。";
                         break;
                     default:
                         break;
                 }
-
+                final Intent Im=intent;
                 //Toast.makeText(MainActivity.this, "选择的模式为：" + cities[which], Toast.LENGTH_SHORT).show();
-                Toast.makeText(MainActivity.this, MyMessage, Toast.LENGTH_LONG).show();
+
             }
         });
         builder.show();
     }
+
+
 }
 ///下载线程类
 class downloadFileThread extends Thread{
