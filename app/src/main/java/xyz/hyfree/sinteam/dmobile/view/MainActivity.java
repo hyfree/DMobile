@@ -1,16 +1,25 @@
 package xyz.hyfree.sinteam.dmobile.view;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+//import android.widget.SearchView;
+import android.support.v7.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
-
+//import android.widget.Toolbar;
+import android.support.v7.widget.Toolbar;
 import xyz.hyfree.sinteam.dmobile.R;
 
 import java.util.ArrayList;
@@ -29,12 +38,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main2);
         gridView= (GridView) findViewById(R.id.gv);
         iv_homePage= (ImageView) findViewById(R.id.iv_home);
         iv_shoppingCar= (ImageView) findViewById(R.id.iv_shoppingcar);
         iv_myself= (ImageView) findViewById(R.id.iv_my);
-        
+        //搜索顶栏
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         //建立数据源
         list=new ArrayList<Map<String,Object>>();
         for(int i=0;i<6;i++){
@@ -110,5 +125,14 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search_view,menu);
+        //找到search view
+        MenuItem searchItem=menu.findItem(R.id.action_search);
+        SearchView searchView=(SearchView) MenuItemCompat.getActionView(searchItem);
+        return super.onCreateOptionsMenu(menu);
     }
 }

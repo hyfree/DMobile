@@ -13,21 +13,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
-        >
+        android:visibility="gone">
+
         <ImageView
             android:id="@+id/iv_arrow_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="6dp"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/arrow_left_icon"/>
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/arrow_left_icon" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:text="会员登录"
-            android:textSize="30dp"
-            android:layout_centerHorizontal="true"/>
+            android:textSize="30dp" />
 
     </RelativeLayout>
 
@@ -96,11 +98,11 @@
 
         </LinearLayout>
     </ScrollView>
-    <TextView
+
+    <Button
         android:id="@+id/tv_register"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="免费注册"
-        android:textColor="@color/colorPrimary"/>
+        android:text="马上注册" />
 
 </LinearLayout>

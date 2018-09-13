@@ -263,9 +263,9 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setIcon(R.drawable.ic_home_black_24dp);
-        builder.setTitle("选择一个界面渲染方案");
+        builder.setTitle("选择启动模式");
         //    指定下拉列表的显示数据
-        final String[] cities = {"TBS方案(html5混合开发)", "Native方案(商城作业)", "Reac Native方案(JS抽象UI)","Hybrid方案(容器渲染)"};
+        final String[] cities = {"动漫APP模式", "商城购物模式"};
         //    设置一个下拉的列表选择项
         builder.setItems(cities, new DialogInterface.OnClickListener()
         {
@@ -273,27 +273,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, final int which)
             {
-                Intent intent=null;
+
                 switch (which){
                     case 0:
-                        MyMessage="html5混合开发模式开发人员可以把HTML5应用程序嵌入到一个细薄的原生容器里面，集原生应用程序和HTML5应用程序的优点（及缺点）于一体。";
-                        break;
-                    case 1:
-                        MyMessage="Native原生开发模式，可以获得更高的性能和稳定性。但是其劣势也是明显的，开发成本大包括开发周期、用户升级等。";
-                         //intent=new Intent(MainActivity.this,xyz.hyfree.sinteam.dmobile.view.MainActivity.class);
-                        break;
-                    case  2://RN
-                        MyMessage="Reac Native开发模式结合了Web应用和Native应用，可以使用JS开原生APP应用：用React抽象UI组件、代替DOM元素来渲染等。";
 
                         break;
-                    case 3://
-                        MyMessage="Hybrid开发模式介于Native APP和web APP之间的混合APP，具有Native APP良好的用户体验和Web APP的跨平台的优势。";
+                    case 1:
+                        Intent intent=new Intent(MainActivity.this,xyz.hyfree.sinteam.dmobile.view.MainActivity.class);
+                        startActivity(intent);
                         break;
                     default:
                         break;
                 }
-                final Intent Im=intent;
-                //Toast.makeText(MainActivity.this, "选择的模式为：" + cities[which], Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(MainActivity.this, "选择的模式为：" + cities[which], Toast.LENGTH_SHORT).show();
 
             }
         });

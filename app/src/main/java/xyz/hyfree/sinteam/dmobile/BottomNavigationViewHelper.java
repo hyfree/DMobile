@@ -9,6 +9,7 @@ import java.lang.reflect.Field;
 
 /**
  * Created by Administrator on 2018/4/3.
+ * 通过这个方法实现低栏的动画平滑过渡，取消低栏动画
  */
 
 public class BottomNavigationViewHelper {

@@ -10,31 +10,30 @@
     tools:context="com.example.administrator.shoppingms.view.MainActivity">
 
 
-    <EditText
-        android:id="@+id/et_serach"
+    <fragment
+        android:id="@+id/fragment"
+        android:name="xyz.hyfree.sinteam.dmobile.Fragment.Search"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="输入要搜索的商品" />
+        android:layout_height="50dp" />
 
-    <ImageView
-        android:id="@+id/tv_search_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="3dp"
-        android:src="@drawable/top_search_icon" />
+    <Space
+
+        android:id="@+id/sp123"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
 
     <GridView
         android:id="@+id/gv"
         android:layout_width="wrap_content"
         android:layout_height="550dp"
-        android:layout_below="@id/et_serach"
+        android:layout_below="@id/sp123"
         android:numColumns="2"></GridView>
 
     <LinearLayout
 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 

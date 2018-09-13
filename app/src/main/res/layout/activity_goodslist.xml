@@ -12,30 +12,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
-        >
+        android:visibility="gone">
+
         <ImageView
             android:id="@+id/iv_arrow_lift"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="6dp"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/arrow_left_icon"/>
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/arrow_left_icon" />
+
         <EditText
             android:id="@+id/et_serach"
             android:layout_width="180dp"
-            android:hint="请输入商品名"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
 
-            android:layout_centerHorizontal="true"/>
+            android:hint="请输入商品名" />
+
         <ImageView
             android:id="@+id/iv_serach2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/top_search_icon"
+            android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:layout_marginTop="5dp"
-            android:layout_alignParentRight="true"/>
+            android:src="@drawable/top_search_icon" />
     </RelativeLayout>
 
     <LinearLayout

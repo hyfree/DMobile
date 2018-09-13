@@ -9,6 +9,9 @@ import android.webkit.WebView;
 
 import java.util.Map;
 
+/***
+ * TBS浏览器服务，提供了上混合模式的html5应用的容器
+ */
 public class TBSWebView extends com.tencent.smtt.sdk.WebView {
     public TBSWebView(Context context) {
         super(context);
