@@ -1,6 +1,7 @@
 package xyz.hyfree.sinteam.dmobile;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.app.Service;
@@ -29,7 +30,7 @@ import android.widget.Toast;
 
 import com.tencent.smtt.export.external.interfaces.IX5WebChromeClient;
 
-import xyz.hyfree.sinteam.dmobile.ACModel.AM_main;
+
 import xyz.hyfree.sinteam.dmobile.TBS.TBSWebView;
 import xyz.hyfree.sinteam.dmobile.Util.HttpDownloader;
 
@@ -116,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @SuppressLint("InvalidWakeLockTag")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
        // requestWindowFeature(Window.FEATURE_NO_TITLE);// 隐藏标题
@@ -233,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        alert(this);
+       // alert(this);
 
 
     }
@@ -264,6 +266,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setIcon(R.drawable.ic_home_black_24dp);
         builder.setTitle("选择启动模式");
+        //builder.setMessage("内容设置");
         //    指定下拉列表的显示数据
         final String[] cities = {"动漫APP模式", "商城购物模式"};
         //    设置一个下拉的列表选择项
@@ -279,8 +282,8 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
                     case 1:
-                        Intent intent=new Intent(MainActivity.this,xyz.hyfree.sinteam.dmobile.view.MainActivity.class);
-                        startActivity(intent);
+                        //Intent intent=new Intent(MainActivity.this,xyz.hyfree.sinteam.dmobile.view.MainActivity.class);
+                        //startActivity(intent);
                         break;
                     default:
                         break;
@@ -290,6 +293,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        builder.setNegativeButton("确认",null);
+
+
         builder.show();
     }
 
