@@ -2,6 +2,7 @@ package xyz.hyfree.sinteam.dmobile;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Application;
 import android.app.Service;
@@ -14,16 +15,21 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.PowerManager;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -32,11 +38,18 @@ import com.tencent.smtt.export.external.interfaces.IX5WebChromeClient;
 
 
 import xyz.hyfree.sinteam.dmobile.TBS.TBSWebView;
+import xyz.hyfree.sinteam.dmobile.Util.AnimationUtils;
 import xyz.hyfree.sinteam.dmobile.Util.HttpDownloader;
 
 public class MainActivity extends AppCompatActivity {
     //
-
+    TBSWebView t1;
+    TBSWebView t2;
+    TBSWebView t3;
+    TBSWebView t4;
+    int webViewAnimationTime=500;
+    int webViewH=0;
+    TBSWebView nowWeb;
     LinearLayout arena;
     ActionBar actionBar;
     BottomNavigationView navigation;
@@ -60,20 +73,65 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                    // mTextMessage.setText(R.string.title_home);
-                    mWebView.loadUrl("file:///android_asset/www/home.html");
+                    //mWebView.loadUrl("file:///android_asset/www/home.html");
+                    if (nowWeb!=t1)
+                    {
+                        //nowWeb.setVisibility(View.GONE);
+                        AnimationUtils.showAndHiddenAnimation(nowWeb,AnimationUtils.AnimationState.STATE_HIDDEN,webViewAnimationTime);
+                        AnimationUtils.showAndHiddenAnimation(t1,AnimationUtils.AnimationState.STATE_SHOW,webViewAnimationTime);
+                        if (!t1.getUrl().equals("file:///android_asset/www/home.html"))
+                        t1.loadUrl("file:///android_asset/www/home.html");
+                       // t1.setVisibility(View.VISIBLE);
+                        nowWeb=t1;
+                    }
+
                     return true;
                 case R.id.navigation_classify:
                     //mTextMessage.setText(R.string.title_classify);
-                    mWebView.loadUrl("file:///android_asset/www/classify.html");
+                   // mWebView.loadUrl("file:///android_asset/www/classify.html");
+                    if (nowWeb!=t2)
+                    {
+                       // nowWeb.setVisibility(View.GONE);
+                        AnimationUtils.showAndHiddenAnimation(nowWeb,AnimationUtils.AnimationState.STATE_HIDDEN,webViewAnimationTime);
+                        AnimationUtils.showAndHiddenAnimation(t2,AnimationUtils.AnimationState.STATE_SHOW,webViewAnimationTime);
+
+                        if (t2.getUrl()==null||!t2.getUrl().toString().equals("file:///android_asset/www/classify.html"))
+                            t2.loadUrl("file:///android_asset/www/classify.html");
+                        //t2.setVisibility(View.VISIBLE);
+                        nowWeb=t2;
+                    }
                     return true;
                 case R.id.navigation_like:
                    // mTextMessage.setText(R.string.title_like);
                     //arena.addView(classfiy);
-                    mWebView.loadUrl("file:///android_asset/www/collection.html");
+                   // mWebView.loadUrl("file:///android_asset/www/collection.html");
+                    if (nowWeb!=t3)
+                    {
+                        // nowWeb.setVisibility(View.GONE);
+                        AnimationUtils.showAndHiddenAnimation(nowWeb,AnimationUtils.AnimationState.STATE_HIDDEN,webViewAnimationTime);
+                        AnimationUtils.showAndHiddenAnimation(t3,AnimationUtils.AnimationState.STATE_SHOW,webViewAnimationTime);
+
+                        if (t3.getUrl()==null||!t3.getUrl().toString().equals("file:///android_asset/www/collection.html"))
+                            t3.loadUrl("file:///android_asset/www/collection.html");
+                        //t2.setVisibility(View.VISIBLE);
+                        nowWeb=t3;
+                    }
                     return true;
                 case R.id.navigation_user:
-                   /// mTextMessage.setText(R.string.title_setup);
-                    mWebView.loadUrl("file:///android_asset/www/setup.html");
+
+                    // mTextMessage.setText(R.string.title_setup);
+                    //mWebView.loadUrl("file:///android_asset/www/setup.html");
+                    if (nowWeb!=t4)
+                    {
+                        // nowWeb.setVisibility(View.GONE);
+                        AnimationUtils.showAndHiddenAnimation(nowWeb,AnimationUtils.AnimationState.STATE_HIDDEN,webViewAnimationTime);
+                        AnimationUtils.showAndHiddenAnimation(t4,AnimationUtils.AnimationState.STATE_SHOW,webViewAnimationTime);
+
+                        if (t4.getUrl()==null||!t4.getUrl().toString().equals("file:///android_asset/www/setup.html"))
+                            t4.loadUrl("file:///android_asset/www/setup.html");
+                        //t2.setVisibility(View.VISIBLE);
+                        nowWeb=t4;
+                    }
                     return true;
             }
             return false;
@@ -117,6 +175,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("InvalidWakeLockTag")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +184,22 @@ public class MainActivity extends AppCompatActivity {
        // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);// 设置全屏
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final SwipeRefreshLayout swipe_refresh_layout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);//找到刷新对象
+
+        swipe_refresh_layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {//设置刷新监听器
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {//模拟耗时操作
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "刷新成功", Toast.LENGTH_SHORT).show();
+                        swipe_refresh_layout.setRefreshing(false);//取消刷新
+                    }
+                },2000);
+            }
+
+        });
+
         actionBar=getSupportActionBar();
         //绑定全屏播放容器
         mFullVideoBox=(FrameLayout)findViewById(R.id.myFullVideoBox);
@@ -154,7 +230,19 @@ public class MainActivity extends AppCompatActivity {
         /*配置mWebView*/
          // mWebView=(WebView)findViewById(R.id.web);
         mWebView=(xyz.hyfree.sinteam.dmobile.TBS.TBSWebView) findViewById(R.id.web);
-        TBSWebView.FastSetting(mWebView,this);
+        t1=mWebView;
+        nowWeb=mWebView;
+        t2=(xyz.hyfree.sinteam.dmobile.TBS.TBSWebView) findViewById(R.id.web2);
+        t3=(xyz.hyfree.sinteam.dmobile.TBS.TBSWebView) findViewById(R.id.web3);
+        t4=(xyz.hyfree.sinteam.dmobile.TBS.TBSWebView) findViewById(R.id.web4);
+
+        TBSWebView.FastSetting(t1,this);
+        TBSWebView.FastSetting(t2,this);
+        TBSWebView.FastSetting(t3,this);
+        TBSWebView.FastSetting(t4,this);
+
+
+
           //打开后开始加载
         mWebView.loadUrl("file:///android_asset/www/home.html");
         final com.tencent.smtt.sdk.WebSettings webSettings=mWebView.getSettings();
@@ -168,6 +256,7 @@ public class MainActivity extends AppCompatActivity {
         mWebView.setWebViewClient(new com.tencent.smtt.sdk.WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(com.tencent.smtt.sdk.WebView webView, String s) {
+
                 mWebView.loadUrl(s);
                 return  true;
                 //return super.shouldOverrideUrlLoading(webView, s);
@@ -175,6 +264,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean shouldOverrideUrlLoading(com.tencent.smtt.sdk.WebView webView, com.tencent.smtt.export.external.interfaces.WebResourceRequest webResourceRequest) {
                 mWebView.loadUrl(webResourceRequest.getUrl().toString());
+                webView.loadUrl(webResourceRequest.getUrl().toString());
                 return true;
                // return super.shouldOverrideUrlLoading(webView, webResourceRequest);
             }
@@ -235,6 +325,26 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        mWebView.setOnScrollChangeListener(new TBSWebView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View view, int i, int i1, int i2, int i3) {
+               // Toast.makeText(MainActivity.this, i+"-"+i1+"-"+i2+i3, Toast.LENGTH_SHORT).show();
+                Log.d("src", i+"-"+i1+"-"+i2+"-"+i3);
+                webViewH=i1;
+                if (webViewH<0||webViewH==0)
+                {
+                    swipe_refresh_layout.setEnabled(true);
+
+
+                }else {
+                    swipe_refresh_layout.setEnabled(false);
+
+                }
+
+            }
+        });
+       // mWebView.setOnCustomScroolChangeListener
+
        // alert(this);
 
 

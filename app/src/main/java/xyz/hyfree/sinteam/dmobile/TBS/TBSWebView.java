@@ -193,4 +193,8 @@ public class TBSWebView extends com.tencent.smtt.sdk.WebView {
 
     }
 
+    @Override
+    public void setOnScrollChangeListener(OnScrollChangeListener l) {
+        super.setOnScrollChangeListener(l);
+    }
 }
